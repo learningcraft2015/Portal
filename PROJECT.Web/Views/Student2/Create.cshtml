@@ -1,0 +1,145 @@
+﻿@model PROJECT.Core.Model.ViewModel.Student2ViewModel
+@using PROJECT.Core.Helpers
+@{
+    ViewBag.Title = "Create Student";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create Student</h2>
+<hr />
+
+@using (Html.BeginForm("Create", "Student2", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group required">
+            @Html.LabelFor(model => model.CourseId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.CourseId, Model.CourseList, "--- Select ---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Gender, "--- Select ---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.StateId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StateId, Model.SelectCountryList, "--- Select ---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.StateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.CurrentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CurrentDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+                @Html.ValidationMessageFor(model => model.CurrentDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.CurrentTimeValue, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CurrentTimeValue, new { @class = "form-control timepicker" })
+                @Html.ValidationMessageFor(model => model.CurrentTimeValue, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.CurrentDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.CurrentDateTime, new { @class = "form-control datetimepicker" } )
+                @Html.ValidationMessageFor(model => model.CurrentDateTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Checkbox, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Checkbox)
+                    @Html.ValidationMessageFor(model => model.Checkbox, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.RadioButton, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                Yes @Html.RadioButtonFor(model => model.RadioButton, QuestionAnswerEnum.Yes.GetHashCode(), new { htmlAttributes = new { @class = "form-control" } })
+                No @Html.RadioButtonFor(model => model.RadioButton, QuestionAnswerEnum.No.GetHashCode(), new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.RadioButton, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.UploadFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <span class="btn btn-default btn-file">
+                            Browse&hellip;   @Html.TextBoxFor(m => m.UploadFile, new { type = "file", style = "max-width: 200px;" })
+                        </span>
+                    </span>
+                    <input type="text" class="form-control" readonly>
+                </div>
+
+
+                @Html.ValidationMessageFor(model => model.UploadFile)
+            </div>
+
+        </div>
+
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Status, "--- Select ---", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <a class="btn btn-primary " href="@Url.Action("Index")">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+
+            Back to List
+        </a>
+    </div>
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

@@ -1,0 +1,136 @@
+﻿@using MvcFlashMessages
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Kensho Lab Demo</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Kensho Lab", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Dashboard", "Dashboard", "Student3")</li>
+                    <li>@Html.ActionLink("Student List", "Index", "Student2")</li>
+                    <li>@Html.ActionLink("Search", "Search", "Student3")</li>
+                    <li>@Html.ActionLink("Report", "Report", "Student3")</li>
+                    <li>@Html.ActionLink("Gallery", "Index", "Student4")</li>
+                    <li>@Html.ActionLink("Home Page widgets", "Index", "Student5")</li>
+                    <li>@Html.ActionLink("Cascade DropDown", "Create", "Student9")</li>
+
+                    
+                    
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        @Html.RenderFlash()
+
+        <div class="body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Kensho Lab Demo</p>
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+
+        $(document).on('change', '.btn-file :file', function () {
+            var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready(function () {
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                    log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if (input.length) {
+                    input.val(log);
+                } else {
+                    if (log) alert(log);
+                }
+
+            });
+        });
+        $(function () {
+
+
+            function disableBack() { window.history.forward() }
+
+            window.onload = disableBack();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBack() }
+
+            //turn off autocomplete
+            $('form,input,select,textarea').attr("autocomplete", "off");
+
+
+            //Start datetime
+
+            $('input.datetimepicker').datetimepicker(); //datetime
+
+            $('input.datepicker').datetimepicker(//date
+
+              { format: 'MMM/DD/YYYY' }
+              );
+            
+
+          
+
+            $('input.timepicker').datetimepicker(  //datetime
+
+               { format: 'LT' }
+               );
+
+
+            //End datetime
+
+
+            //Start datetime
+            $('input.datepickerurl').datetimepicker(//date
+
+             { format: 'MMM-DD-YYYY' }
+             );
+            //End datetime
+
+
+
+            // Print 
+            $('#printIcon').prepend('<span id="print" style="font-size:3em;" class="pull-right glyphicon glyphicon-print" aria-hidden="true"></span>')
+
+            $('#print').bind("click", function () {
+                $("#printThis").printThis();
+           });
+            //Print
+        });
+
+       
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+﻿@model PROJECT.Core.Model.ViewModel.Student2ViewModel
+@using PROJECT.Core.Helpers
+@{
+    ViewBag.Title = "Student Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<h2>Student Details</h2>
+<hr />
+<div>
+   
+   
+    <div class="row">
+        <div class="col-xs-6">
+
+            <dl class="dl-horizontal">
+
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CourseTitle)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CourseTitle)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </dt>
+
+                <dd>
+                    @Enum.GetName(typeof(GenderEnum), Model.Gender)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CurrentDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CurrentDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CurrentTime)
+                </dt>
+
+                <dd>
+                   
+                    @(Model.CurrentTime.HasValue ? Model.CurrentTime.Value.ToString("hh:mm tt") : string.Empty)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CurrentDateTime)
+                </dt>
+
+                <dd>                   
+
+                    @Model.CurrentDateTime.ToString("MMM-dd-yyyy,hh:mm tt")
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Checkbox)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Checkbox)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.RadioButton)
+                </dt>
+
+                <dd>
+                    @Enum.GetName(typeof(QuestionAnswerEnum), Model.RadioButton)
+               
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+
+                <dd>
+                    @Enum.GetName(typeof(StatusEnum), Model.Status)
+                </dd>
+
+            </dl>
+        </div>
+
+
+        <div class="col-xs-6">
+            @{
+
+                string fullFilePath = string.Empty;
+                fullFilePath = (string.IsNullOrEmpty(Model.FileName)) ? "holder.js/100x100" : Url.Content(ApplicationConstant.UPLOADED_STUDENT_IMAGE_PATH + Model.FileName);
+            }
+                        
+
+            <img src="@fullFilePath" width="300" height="300" alt="No Image" class="img-thumbnail" />
+
+
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <a style="width:90px" class="btn btn-warning" href="@Url.Action("Edit", new { id = Model.StudentId })">
+            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+
+            Edit
+        </a>
+
+
+
+        <a class="btn btn-primary " href="@Url.Action("Index")">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+
+            Back to List
+        </a>
+        <a class="btn btn-primary " href="@Url.Action("Search", "Student3")">
+            <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
+            Back to Search
+        </a>
+    </div>
+</div>

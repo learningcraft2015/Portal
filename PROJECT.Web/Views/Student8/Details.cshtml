@@ -1,0 +1,69 @@
+﻿@model PROJECT.Core.Model.ViewModel.Student8ViewModel
+
+@{
+    ViewBag.Title = "Task Details";
+}
+
+<h2>Task Details</h2>
+<hr />
+
+    
+    
+    <dl class="dl-horizontal">
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            <div id="">
+                @Html.Raw(Model.Description)
+            </div>
+          
+        </dd>
+
+    </dl>
+
+<p>
+    @Html.ActionLink("Create", "Create", new { /* id = Model.PrimaryKey */ }) |
+  
+</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <!-- TinyMCE Script Reference -->
+    <script src="~/scripts/tinymce/tinymce.min.js"></script>
+    <!-- Script to wire up your TinyMCE editor -->
+    <script type="text/javascript">
+
+    tinyMCE.init({
+        mode: "textareas",
+        editor_selector: "mceEditor",
+        theme: "modern",
+        readonly: true,
+        menubar: false,
+        statusbar: false,
+        toolbar: false,
+        width: '200',
+        height: '300'
+       
+
+    });
+
+
+   
+
+
+
+   
+    </script>
+}

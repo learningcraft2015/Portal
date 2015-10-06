@@ -1,0 +1,123 @@
+﻿@model PROJECT.Core.Model.ViewModel.Student10ViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Multiple Product Create</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form-group required">
+        @Html.LabelFor(model => model.ExpectedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ExpectedDate, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.ValidationMessageFor(model => model.ExpectedDate, "", new { @class = "text-danger" })
+
+
+        </div>
+    </div>
+    <div class="form-group required">
+        @Html.LabelFor(model => model.VendorId, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.VendorId, new { htmlAttributes = new { @class = "form-control" } })
+
+            @Html.ValidationMessageFor(model => model.VendorId, "", new { @class = "text-danger" })
+
+
+        </div>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>
+                ProductId Name
+            </th>
+            <th>
+               Quantity
+            </th>
+            <th>
+                Selected
+            </th>
+            <th></th>
+        </tr>
+
+       @for (int i = 0; i < Model.ProductList.Count(); i++)
+       {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.ProductList[i].ProductName)
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ProductList[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    @Html.EditorFor(model => model.ProductList[i].IsSelected, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+}
+    @*<div class="form-horizontal">
+            <h4>Student10ViewModel</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @for (int i = 0; i < Model.ProductList.Count(); i++)
+            {
+
+                @Html.HiddenFor(model => model.ProductList[i].ProductId)
+
+        <div class="form-group required">
+            @Html.LabelFor(model => model.ProductList[i].ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.ProductList[i].ProductName)
+
+
+            </div>
+        </div>
+
+                <div class="form-group required">
+                    @Html.LabelFor(model => model.ProductList[i].Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ProductList[i].Quantity, new { htmlAttributes = new { @class = "form-control" } })
+
+                        @Html.ValidationMessageFor(model => model.ProductList[i].Quantity, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+        <div class="form-group required">
+            @Html.LabelFor(model => model.ProductList[i].IsSelected, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductList[i].IsSelected, new { htmlAttributes = new { @class = "form-control" } })
+
+                @Html.ValidationMessageFor(model => model.ProductList[i].IsSelected, "", new { @class = "text-danger" })
+            </div>
+        </div>
+            }
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }*@
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
